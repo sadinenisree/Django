@@ -6,12 +6,16 @@
     <title>Beautiful Places</title>
 
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
+        html, body {
+             height: 100%;          
             margin: 0;
             padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            display: flex;        
+            flex-direction: column;
         }
+
 
         header, footer {
             background: #333;
@@ -22,14 +26,20 @@
         }
 
         .container {
+            flex: 1;                     
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;    
+            align-items: center;          
             width: 90%;
             max-width: 850px;
-            margin: 30px auto;
+            margin: 0 auto;               
             background: white;
-            padding: 25px;
+            padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
+
 
         .label-title {
             font-weight: bold;
@@ -48,13 +58,16 @@
 
         img {
             width: 100%;
+            max-height: 60vh;       
+            object-fit: contain;        
             border-radius: 10px;
             margin-top: 15px;
         }
 
         .btn-area {
-            margin-top: 25px;
+            margin-top: 20px;
             text-align: center;
+            width: 100%;
         }
 
         button {
@@ -76,6 +89,73 @@
         button:hover:not(:disabled) {
             background: #555;
         }
+
+        .image-wrapper {
+            position: relative;   
+            width: 100%;
+        }
+
+        .nav-btn {
+        position: absolute;
+        top: 50%;              
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.5);
+        color: white;
+        padding: 12px 18px;
+        border-radius: 50%;
+        font-size: 24px;
+        text-decoration: none;
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.3s;
+        }
+
+        .nav-btn:hover:not(.disabled) {
+        background: rgba(0,0,0,0.7);
+        }
+
+        .prev-btn {
+        left: 10px;            
+        }
+
+        .next-btn {
+        right: 10px;           
+        }
+
+        .nav-btn.disabled {
+        background: rgba(0,0,0,0.2);
+        cursor: not-allowed;
+        }
+
+        .nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0,0,0,0.5);
+        color: white;
+        padding: 12px 18px;
+        border-radius: 50%;
+        font-size: 24px;
+        text-decoration: none;
+        cursor: pointer;
+        user-select: none;
+        transition: background 0.3s;
+        }
+
+        /* Tooltip */
+        .nav-btn:hover::after {
+        content: attr(title);
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -150%);
+        background: rgba(0,0,0,0.8);
+        color: white;
+        padding: 5px 8px;
+        border-radius: 4px;
+        font-size: 14px;
+        white-space: nowrap;
+        }
+
     </style>
 
 </head>
@@ -94,21 +174,28 @@
     <div class="content-box">{{ item.translated }}</div>
 
     <div class="label-title">Image</div>
-    <img src="{{ item.image }}" alt="Place Image"/>
 
-    <div class="btn-area">
+    <div class="image-wrapper">
+        <img src="{{ item.image }}" alt="Place Image"/>
+
         {% if current_index > 0 %}
-            <a href="/?index={{ prev_index }}"><button>Previous</button></a>
+            <a href="/?index={{ prev_index }}&lang={{ selected_lang }}" class="nav-btn prev-btn" title="Previous">❮</a>
         {% else %}
-            <button disabled>Previous</button>
+            <span class="nav-btn prev-btn disabled" title="Previous">❮</span>
         {% endif %}
 
         {% if current_index < last_index %}
-            <a href="/?index={{ next_index }}"><button>Next</button></a>
+            <a href="/?index={{ next_index }}&lang={{ selected_lang }}" class="nav-btn next-btn" title="Next">❯</a>
         {% else %}
-            <button disabled>Next</button>
+            <span class="nav-btn next-btn disabled" title="Next">❯</span>
         {% endif %}
     </div>
+
+
+    <div class="page-info">
+        Page {{ current_index|add:"1" }} of {{ last_index|add:"1" }}
+    </div>
+
     <script>
     document.addEventListener("keydown", function(event) {
         if(event.key === "ArrowLeft") {
