@@ -8,14 +8,14 @@ def index(request):
             "image": "https://upload.wikimedia.org/wikipedia/commons/d/da/Taj-Mahal.jpg"
         },
         {
-            "original": "చైనా మహా ప్రాచీర్",
+            "original": "మహా ప్రాచీర్ - చైనా",
             "translated": "Great Wall of China — China",
             "image": "https://upload.wikimedia.org/wikipedia/commons/1/10/20090529_Great_Wall_8185.jpg"
         },
         {
             "original": "పెట్రా - జోర్డాన్",
             "translated": "Petra — Jordan",
-            "image": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Al_Khazneh.jpg"
+            "image": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Petra_Jordan_BW_01.jpg"
         },
         {
             "original": "క్రైస్ట్ ది రిడీమర్ - బ్రెజిల్",

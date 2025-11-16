@@ -109,6 +109,19 @@
             <button disabled>Next</button>
         {% endif %}
     </div>
+    <script>
+    document.addEventListener("keydown", function(event) {
+        if(event.key === "ArrowLeft") {
+            const prevBtn = document.querySelector("a[href*='index={{ prev_index }}']");
+            if(prevBtn) prevBtn.click();
+        }
+        if(event.key === "ArrowRight") {
+            const nextBtn = document.querySelector("a[href*='index={{ next_index }}']");
+            if(nextBtn) nextBtn.click();
+        }
+    });
+    </script>
+
 
 </div>
 
