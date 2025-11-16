@@ -97,20 +97,19 @@
     <img src="{{ item.image }}" alt="Place Image"/>
 
     <div class="btn-area">
-        <!-- Corrected: Disable Previous when index == 0 -->
-        <a href="/?index={{ prev_index }}">
-            <button {% if prev_index == current_index %}disabled{% endif %}>
-                Previous
-            </button>
-        </a>
+        {% if current_index > 0 %}
+            <a href="/?index={{ prev_index }}"><button>Previous</button></a>
+        {% else %}
+            <button disabled>Previous</button>
+        {% endif %}
 
-        <!-- Corrected: Disable Next when index == last -->
-        <a href="/?index={{ next_index }}">
-            <button {% if next_index == current_index %}disabled{% endif %}>
-                Next
-            </button>
-        </a>
+        {% if current_index < last_index %}
+            <a href="/?index={{ next_index }}"><button>Next</button></a>
+        {% else %}
+            <button disabled>Next</button>
+        {% endif %}
     </div>
+
 </div>
 
 <footer>

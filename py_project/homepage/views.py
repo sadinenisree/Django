@@ -49,13 +49,25 @@ def index(request):
         }
     ]
 
-    index_value = int(request.GET.get("index", 0))
-    index_value = index_value % len(data)
+    last_index = len(data) - 1
+    try:
+        current_index = int(request.GET.get("index", 0))
+    except (TypeError, ValueError):
+        current_index = 0
+
+    # Clamp current_index to valid range [0, last_index]
+    current_index = max(0, min(current_index, last_index))
+
+    # Determine previous and next indices safely
+    prev_index = max(current_index - 1, 0)
+    next_index = min(current_index + 1, last_index)
 
     context = {
-        "item": data[index_value],
-        "next_index": (index_value + 1) % len(data),
-        "prev_index": (index_value - 1 + len(data)) % len(data),
+        "item": data[current_index],
+        "current_index": current_index,
+        "prev_index": prev_index,
+        "next_index": next_index,
+        "last_index": last_index,
     }
 
     return render(request, "header.html", context)
