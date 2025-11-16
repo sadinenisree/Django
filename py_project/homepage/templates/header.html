@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Places</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        header, footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 22px;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 850px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+
+        .label-title {
+            font-weight: bold;
+            font-size: 20px;
+            margin-top: 20px;
+            color: #444;
+        }
+
+        .content-box {
+            margin-top: 5px;
+            font-size: 18px;
+            background: #f0f0f0;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .btn-area {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        button {
+            padding: 12px 25px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+            background: #333;
+            color: white;
+        }
+
+        button:disabled {
+            background: #777;
+            cursor: not-allowed;
+        }
+
+        button:hover:not(:disabled) {
+            background: #555;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<header>
+    Beautiful Places Around the World
+</header>
+
+<div class="container">
+    <div class="label-title">Original Language</div>
+    <div class="content-box">{{ item.original }}</div>
+
+    <div class="label-title">Translated Language</div>
+    <div class="content-box">{{ item.translated }}</div>
+
+    <div class="label-title">Image</div>
+    <img src="{{ item.image }}" alt="Place Image"/>
+
+    <div class="btn-area">
+        <!-- Corrected: Disable Previous when index == 0 -->
+        <a href="/?index={{ prev_index }}">
+            <button {% if prev_index == current_index %}disabled{% endif %}>
+                Previous
+            </button>
+        </a>
+
+        <!-- Corrected: Disable Next when index == last -->
+        <a href="/?index={{ next_index }}">
+            <button {% if next_index == current_index %}disabled{% endif %}>
+                Next
+            </button>
+        </a>
+    </div>
+</div>
+
+<footer>
+    Developed by Srikanth Sadineni — Test held on 16 Nov 2025
+</footer>
+
+</body>
+</html>
